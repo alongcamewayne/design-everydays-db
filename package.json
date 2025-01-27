@@ -7,7 +7,8 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"seed:db": "bun run ./src/scripts/seedDb.ts"
 	},
 	"dependencies": {
 		"@libsql/client": "^0.14.0",
