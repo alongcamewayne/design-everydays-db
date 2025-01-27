@@ -21,9 +21,8 @@ export const tokensTable = sqliteTable(
 		description: text(),
 		aiDescription: text(),
 		mintDate: int({ mode: 'timestamp_ms' }),
-		variant: int().notNull().default(1),
 	},
 	(table) => {
-		return [primaryKey({ columns: [table.collectionId, table.tokenId, table.variant] })];
+		return [primaryKey({ columns: [table.collectionId, table.tokenId] })];
 	}
 );
