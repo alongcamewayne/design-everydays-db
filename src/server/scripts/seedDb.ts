@@ -1,9 +1,9 @@
 import { mainnet, zora } from 'viem/chains';
 import { reset } from 'drizzle-seed';
-import { db } from '@/db';
-import * as schema from '@/db/schema';
-import { collectionsTable, tokensTable } from '@/db/schema';
-import tokens from '../../token-snapshot.json';
+import { db } from '@/server/db';
+import * as schema from '@/server/db/schema';
+import { collectionsTable, tokensTable } from '@/server/db/schema';
+import tokens from '../../../token-snapshot.json';
 
 type NewCollection = typeof collectionsTable.$inferInsert;
 // type NewToken = typeof tokensTable.$inferInsert;
