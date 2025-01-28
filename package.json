@@ -11,6 +11,7 @@
 		"seed:db": "bun run ./src/server/scripts/seedDb.ts"
 	},
 	"dependencies": {
+		"@ai-sdk/openai": "^1.1.5",
 		"@libsql/client": "^0.14.0",
 		"ai": "^4.1.9",
 		"class-variance-authority": "^0.7.1",
