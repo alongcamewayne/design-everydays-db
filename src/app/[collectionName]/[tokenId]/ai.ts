@@ -32,7 +32,7 @@ export async function getAiCaption({ token }: { token: typeof tokensTable.$infer
 					},
 					{
 						type: 'image',
-						image: new URL(`https://ipfs.io/ipfs/${token.imageHash}`),
+						image: new URL(`https://gateway.pinata.cloud/ipfs/${token.imageHash}`),
 						mimeType: 'image/jpeg',
 					},
 				],

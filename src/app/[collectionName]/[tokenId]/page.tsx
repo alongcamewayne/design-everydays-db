@@ -10,7 +10,7 @@ type Params = { params: { collectionName: string; tokenId: string } };
 export const revalidate = 0;
 
 function hashToLink(hash: string) {
-	return `https://ipfs.io/ipfs/${hash}`;
+	return `https://gateway.pinata.cloud/ipfs/${hash}`;
 }
 
 async function getToken({ collectionName, tokenId }: { collectionName: string; tokenId: number }) {
