@@ -2,11 +2,10 @@ import { mainnet, zora } from 'viem/chains';
 import { reset } from 'drizzle-seed';
 import { db } from '@/server/db';
 import * as schema from '@/server/db/schema';
-import { collectionsTable, tokensTable } from '@/server/db/schema';
 import tokens from '../../../token-snapshot.json';
 
-type NewCollection = typeof collectionsTable.$inferInsert;
-// type NewToken = typeof tokensTable.$inferInsert;
+type NewCollection = typeof schema.collectionsTable.$inferInsert;
+// type NewToken = typeof schema.tokensTable.$inferInsert;
 
 const collections: NewCollection[] = [
 	{
@@ -26,8 +25,8 @@ const collections: NewCollection[] = [
 try {
 	// @ts-expect-error - this is correct per docs, but throws a type error. investigate later.
 	await reset(db, schema);
-	await db.insert(collectionsTable).values(collections).onConflictDoNothing();
-	await db.insert(tokensTable).values(tokens);
+	await db.insert(schema.collectionsTable).values(collections).onConflictDoNothing();
+	await db.insert(schema.tokensTable).values(tokens);
 } catch (error) {
 	console.error(error);
 }
