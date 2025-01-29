@@ -1,16 +1,21 @@
-import Link from 'next/link';
+import { getData } from '@/server/db/utils';
+import Home from '@/components/Home';
 
-export const revalidate = 0;
+export default async function Page() {
+	const data = await getData();
 
-export default function Home() {
 	return (
-		<div>
-			<div className="font-bold">Design Everydays</div>
+		<div className="max-w-2xl p-4">
+			<div className="border-b-2 border-black pb-0.5 font-bold">
+				<p>Design Everydays</p>
+			</div>
 
-			<div className="flex flex-col">
+			{/* <div className="flex flex-col">
 				<Link href="/season-one">Season 1</Link>
 				<Link href="/season-two">Season 2</Link>
-			</div>
+			</div> */}
+
+			<Home data={data} />
 		</div>
 	);
 }
