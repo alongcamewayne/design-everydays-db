@@ -1,13 +1,34 @@
+import { Glob } from 'bun';
 import { mainnet, zora } from 'viem/chains';
 import { reset } from 'drizzle-seed';
+import type { NewCollection } from '@/lib/types';
 import { db } from '@/server/db';
 import * as schema from '@/server/db/schema';
-import tokens from '../../../token-snapshot.json';
+import snapshotTokens from '../../../token-snapshot.json';
 
-type NewCollection = typeof schema.collectionsTable.$inferInsert;
-// type NewToken = typeof schema.tokensTable.$inferInsert;
+const outputDir = 'src/server/scripts/output';
+const glob = new Glob('*-token-output.json');
+const filePaths: string[] = [];
 
-const collections: NewCollection[] = [
+let tokens = snapshotTokens;
+
+for await (const file of glob.scan(outputDir)) {
+	filePaths.push(`${outputDir}/${file}`);
+}
+
+if (filePaths.length) {
+	filePaths.sort((a, b) => {
+		const aDate = parseInt(a.split('-')[0]);
+		const bDate = parseInt(b.split('-')[0]);
+		return bDate - aDate;
+	});
+
+	const file = Bun.file(filePaths[0]);
+	const data = await file.json();
+	tokens = data;
+}
+
+export const collections: NewCollection[] = [
 	{
 		id: 1,
 		name: 'Design Everydays, Season 1',

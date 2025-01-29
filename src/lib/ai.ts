@@ -2,14 +2,14 @@
 
 import { generateText } from 'ai';
 import { createOpenAI } from '@ai-sdk/openai';
-import { tokensTable } from '@/server/db/schema';
+import type { Token } from './types';
 
 const openai = createOpenAI({
 	compatibility: 'strict',
 	apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function getAiCaption({ token }: { token: typeof tokensTable.$inferSelect }) {
+export async function generateSummary({ token }: { token: Token }) {
 	const { text } = await generateText({
 		model: openai('gpt-4o-mini'),
 		messages: [

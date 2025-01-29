@@ -1,12 +1,13 @@
 'use server';
 
-import { asc } from 'drizzle-orm';
+import { and, asc, eq } from 'drizzle-orm';
+import type { Collection, Token } from '@/lib/types';
 import { db } from '@/server/db';
 import { collectionsTable, tokensTable } from '@/server/db/schema';
 
 type DataArray = {
-	metadata: typeof collectionsTable.$inferSelect;
-	tokens: (typeof tokensTable.$inferSelect)[];
+	metadata: Collection;
+	tokens: Token[];
 }[];
 
 export async function getData() {
@@ -30,4 +31,22 @@ export async function getData() {
 	}
 
 	return data;
+}
+
+export async function saveAiSummary({ token, summary }: { token: Token; summary: string }) {
+	try {
+		await db
+			.update(tokensTable)
+			.set({ aiDescription: summary })
+			.where(
+				and(
+					eq(tokensTable.tokenId, token.tokenId),
+					eq(tokensTable.collectionId, token.collectionId)
+				)
+			);
+		return { success: true };
+	} catch (error) {
+		console.error(error);
+		return { success: false };
+	}
 }

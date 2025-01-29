@@ -1,5 +1,9 @@
 'use client';
 
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { saveAiSummary, type getData } from '@/server/db/utils';
 import {
 	Table,
 	TableBody,
@@ -9,7 +13,6 @@ import {
 	TableHeader,
 	TableRow,
 } from '@/components/ui/table';
-import { Button } from './ui/button';
 import {
 	Sheet,
 	SheetContent,
@@ -18,9 +21,10 @@ import {
 	SheetTitle,
 	SheetTrigger,
 } from '@/components/ui/sheet';
-import Link from 'next/link';
-import Image from 'next/image';
-import type { getData } from '@/server/db/utils';
+import { Button } from './ui/button';
+import { generateSummary } from '@/lib/ai';
+import type { Token } from '@/lib/types';
+import { toast } from 'sonner';
 
 type TokenTableProps = {
 	data: Awaited<ReturnType<typeof getData>>[number];
@@ -34,6 +38,39 @@ function truncateUri(uri: string) {
 }
 
 export default function TokenTable({ data }: TokenTableProps) {
+	const [activeTokenId, setActiveTokenId] = useState<number | undefined>();
+	const [aiSummary, setAISummary] = useState<string>('');
+	const [loading, setLoading] = useState<boolean>(false);
+
+	async function generateAiSummary(token: Token) {
+		toast.info('Generating AI Summary...');
+		setLoading(true);
+
+		try {
+			const summary = await generateSummary({ token });
+			setAISummary(summary);
+			toast.success('Successfully generated AI Summary!');
+		} catch (error) {
+			console.error(error);
+			toast.error('Failed to generate AI Summary, please try again.');
+		}
+
+		setLoading(false);
+	}
+
+	async function saveSummary(token: Token) {
+		const { success } = await saveAiSummary({ token, summary: aiSummary });
+
+		if (!success) {
+			toast.error('Failed to save summary, please try again.');
+			return;
+		}
+
+		data.tokens[activeTokenId!].aiDescription = aiSummary;
+		setAISummary('');
+		toast.success('Successfully saved summary to database!');
+	}
+
 	return (
 		<Table>
 			<TableCaption>A list of your recent invoices.</TableCaption>
@@ -49,12 +86,14 @@ export default function TokenTable({ data }: TokenTableProps) {
 			<TableBody>
 				{data.tokens.map((token) => {
 					return (
-						<Sheet key={token.tokenId}>
+						<Sheet
+							key={token.tokenId}
+							onOpenChange={(open) => setActiveTokenId(open ? token.tokenId : undefined)}>
 							<SheetTrigger asChild>
 								<TableRow className="cursor-pointer">
 									<TableCell className="font-medium">{token.tokenId}</TableCell>
 									<TableCell>{token.name}</TableCell>
-									<TableCell className="text-muted-foreground max-w-sm truncate">
+									<TableCell className="max-w-sm truncate text-muted-foreground">
 										{token.description}
 									</TableCell>
 								</TableRow>
@@ -77,9 +116,28 @@ export default function TokenTable({ data }: TokenTableProps) {
 									</div>
 
 									<div>
-										<p className="text-secondary-foreground mb-1 text-sm font-semibold">Concept</p>
+										<p className="mb-1 text-sm font-semibold text-secondary-foreground">
+											◆ Concept
+										</p>
 										<p>{token.description}</p>
 									</div>
+
+									{activeTokenId === token.tokenId && (aiSummary || token.aiDescription) && (
+										<div>
+											<p className="mb-1 text-sm font-semibold text-secondary-foreground">
+												◆ AI Summary
+											</p>
+											<p>{aiSummary || token.aiDescription}</p>
+											{aiSummary && aiSummary !== token.aiDescription && (
+												<Button
+													onClick={() => saveSummary(token)}
+													variant="outline"
+													className="mt-2">
+													Save Summary
+												</Button>
+											)}
+										</div>
+									)}
 
 									<div className="flex flex-col divide-y text-sm">
 										<div className="flex justify-between py-2">
@@ -92,7 +150,7 @@ export default function TokenTable({ data }: TokenTableProps) {
 											<Link
 												href={`https://gateway.pinata.cloud/ipfs/${token.uriHash}`}
 												target="_blank"
-												className="border-primary/20 border-b">
+												className="border-b border-primary/20">
 												{truncateUri(token.uriHash)}
 											</Link>
 										</div>
@@ -104,13 +162,24 @@ export default function TokenTable({ data }: TokenTableProps) {
 										</div>
 									</div>
 
-									<Button asChild>
-										<Link
-											href={`https://zora.co/collect/${data.metadata.chainId === 1 ? 'eth' : 'zora'}:${data.metadata.contractAddress}/${token.tokenId}`}
-											target="_blank">
-											Open on Zora
-										</Link>
-									</Button>
+									<div className="flex flex-col gap-2">
+										<Button asChild>
+											<Link
+												href={`https://zora.co/collect/${data.metadata.chainId === 1 ? 'eth' : 'zora'}:${data.metadata.contractAddress}/${token.tokenId}`}
+												target="_blank"
+												className="py-5">
+												Open on Zora
+											</Link>
+										</Button>
+
+										<Button
+											variant="secondary"
+											onClick={() => generateAiSummary(token)}
+											disabled={loading}
+											className="border py-5">
+											{loading ? 'Generating...' : '✨ Generate AI Summary ✨'}
+										</Button>
+									</div>
 								</div>
 							</SheetContent>
 						</Sheet>
