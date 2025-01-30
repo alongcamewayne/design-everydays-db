@@ -15,6 +15,10 @@ Copy the `.env.example` file to `.env.local` and update the `OPENAI_API_KEY`. Yo
 cp .env.example .env.local
 ```
 
+```env
+OPENAI_API_KEY=YOUR API KEY
+```
+
 The project comes with a snapshot of the Design Everyday collections.
 
 - Season 1: tokens 0-346
@@ -23,7 +27,9 @@ The project comes with a snapshot of the Design Everyday collections.
 The default database is a SQLite database that has already been seeded. Now you can just install the dependencies and run the app!
 
 ```bash
+# install dependencies
 bun install
+# start local dev server
 bun run dev
 ```
 
@@ -32,18 +38,22 @@ bun run dev
 The project includes a snapshot of the Design Everyday tokens. You can retrieve new tokens by running the `fetch:tokens` script. This will create a new file in `src/server/scripts/output` with the new token data. To save the data to the database, run `db:add:tokens`.
 
 ```bash
+# get data for new tokens
 bun run fetch:tokens
+# add tokens to the database
 bun run db:add:tokens
 ```
 
 If you want to clear the database of all collection and token data, run `db:reset`.
 
 ```bash
+# clear data from the database
 bun run db:reset
 ```
 
 And you can reseed the database from the snapshot with the `db:seed` script.
 
 ```bash
+# import snapshot data into database
 bun run db:seed
 ```
