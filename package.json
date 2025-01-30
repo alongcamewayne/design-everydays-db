@@ -8,7 +8,9 @@
 		"start": "next start",
 		"lint": "next lint",
 		"format": "prettier --write .",
-		"seed:db": "bun run ./src/server/scripts/seedDb.ts",
+		"db:seed": "bun run db:reset && bun run ./src/server/scripts/seedDb.ts",
+		"db:add:tokens": "bun run ./src/server/scripts/addTokens.ts",
+		"db:reset": "bun run ./src/server/scripts/resetDb.ts",
 		"fetch:tokens": "bun run ./src/server/scripts/fetchTokenData.ts"
 	},
 	"dependencies": {
