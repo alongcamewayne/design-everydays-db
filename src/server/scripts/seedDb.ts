@@ -1,6 +1,5 @@
 import { Glob } from 'bun';
 import { mainnet, zora } from 'viem/chains';
-import { reset } from 'drizzle-seed';
 import type { NewCollection } from '@/lib/types';
 import { db } from '@/server/db';
 import * as schema from '@/server/db/schema';
@@ -44,10 +43,8 @@ export const collections: NewCollection[] = [
 ];
 
 try {
-	// @ts-expect-error - this is correct per docs, but throws a type error. investigate later.
-	await reset(db, schema);
 	await db.insert(schema.collectionsTable).values(collections).onConflictDoNothing();
-	await db.insert(schema.tokensTable).values(tokens);
+	await db.insert(schema.tokensTable).values(tokens).onConflictDoNothing();
 } catch (error) {
 	console.error(error);
 }
