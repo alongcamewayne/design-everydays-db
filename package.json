@@ -8,7 +8,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"format": "prettier --write .",
-		"seed:db": "bun run ./src/server/scripts/seedDb.ts"
+		"seed:db": "bun run ./src/server/scripts/seedDb.ts",
+		"fetch:tokens": "bun run ./src/server/scripts/fetchTokenData.ts"
 	},
 	"dependencies": {
 		"@ai-sdk/openai": "^1.1.5",
