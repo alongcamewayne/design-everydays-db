@@ -108,7 +108,7 @@ export default function TokenTable({ data }: TokenTableProps) {
 									<div className="relative aspect-square w-full overflow-hidden rounded">
 										<div className="absolute left-0 top-0 aspect-square w-full animate-pulse bg-gray-500"></div>
 										<Image
-											src={`https://gateway.pinata.cloud/ipfs/${token.imageHash}`}
+											src={`https://nftstorage.link/ipfs/${token.imageHash}`}
 											alt={token.name || 'token image'}
 											fill={true}
 											className="object-contain"
@@ -148,7 +148,7 @@ export default function TokenTable({ data }: TokenTableProps) {
 										<div className="flex justify-between py-2">
 											<p>IPFS URI</p>
 											<Link
-												href={`https://gateway.pinata.cloud/ipfs/${token.uriHash}`}
+												href={`https://nftstorage.link/ipfs/${token.uriHash}`}
 												target="_blank"
 												className="border-b border-primary/20">
 												{truncateUri(token.uriHash)}

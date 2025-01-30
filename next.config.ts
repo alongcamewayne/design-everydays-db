@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'gateway.pinata.cloud',
+				hostname: 'nftstorage.link',
 				port: '',
 				pathname: '/ipfs/**',
 				search: '',
