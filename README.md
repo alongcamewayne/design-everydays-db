@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+> [!NOTE]
+> This repo was originally created for a [bounty](https://www.bountycaster.xyz/bounty/0x2ce371c71f9f33796b33034212aea5df9ca05da4) on Bountycaster.
 
-## Getting Started
+# Design Everydays Visual Database
 
-First, run the development server:
+![screenshot](./screenshot.png)
+
+A simple app to review the [Design Everydays](https://designeverydays.com/) collections. Built with Bun, Next.js, Drizzle, and SQLite.
+
+## Getting started
+
+Copy the `.env.example` file to `.env.local` and update the `OPENAI_API_KEY`. You can create an API key in the [OpenAI dashboard](https://platform.openai.com/settings/organization/api-keys).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The project comes with a snapshot of the Design Everyday collections.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Season 1: tokens 0-346
+- Season 2: tokens 0-374
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The default database is a SQLite database that has already been seeded. Now you can just install the dependencies and run the app!
 
-## Learn More
+```bash
+bun install
+bun run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project includes a snapshot of the Design Everyday tokens. You can retrieve new tokens by running the `fetch:tokens` script. This will create a new file in `src/server/scripts/output` with the new token data. To save the data to the database, run `db:add:tokens`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+bun run fetch:tokens
+bun run db:add:tokens
+```
 
-## Deploy on Vercel
+If you want to clear the database of all collection and token data, run `db:reset`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+bun run db:reset
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+And you can reseed the database from the snapshot with the `db:seed` script.
+
+```bash
+bun run db:seed
+```
