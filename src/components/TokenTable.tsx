@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { saveAiSummary, type getData } from '@/server/db/utils';
@@ -41,6 +41,10 @@ export default function TokenTable({ data }: TokenTableProps) {
 	const [activeTokenId, setActiveTokenId] = useState<number | undefined>();
 	const [aiSummary, setAISummary] = useState<string>('');
 	const [loading, setLoading] = useState<boolean>(false);
+
+	useEffect(() => {
+		setAISummary('');
+	}, [activeTokenId]);
 
 	async function generateAiSummary(token: Token) {
 		toast.info('Generating AI Summary...');
