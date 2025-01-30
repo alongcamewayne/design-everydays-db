@@ -29,7 +29,7 @@ export default function Home({ data }: HomeProps) {
 								/>
 								<Label
 									htmlFor={metadata.name}
-									className="hover:bg-primary/10 peer-data-[state=checked]:bg-primary peer-data-[state=checked]:border-primary w-full cursor-pointer overflow-hidden rounded-none transition peer-data-[state=checked]:text-white">
+									className="w-full cursor-pointer overflow-hidden rounded-none transition hover:bg-primary/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-white">
 									<Card className="rounded-none border-current bg-transparent text-current">
 										<CardHeader>
 											<CardTitle>Season {metadata.id}</CardTitle>
