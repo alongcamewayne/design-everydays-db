@@ -119,12 +119,14 @@ export default function TokenTable({ data }: TokenTableProps) {
 										/>
 									</div>
 
-									<div>
-										<p className="mb-1 text-sm font-semibold text-secondary-foreground">
-											◆ Concept
-										</p>
-										<p>{token.description}</p>
-									</div>
+									{token.description && (
+										<div>
+											<p className="mb-1 text-sm font-semibold text-secondary-foreground">
+												◆ Concept
+											</p>
+											<p>{token.description}</p>
+										</div>
+									)}
 
 									{activeTokenId === token.tokenId && (aiSummary || token.aiDescription) && (
 										<div>

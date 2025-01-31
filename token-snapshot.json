@@ -5774,5 +5774,85 @@
 		"name": "373 crash out",
 		"imageHash": "bafybeibb3athvivcqma5ej6ocl75snlfjn276znxgvzqi5orht7jyik6pe",
 		"description": "phantom added a new button. does anyone know what it does?"
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 0,
+		"uriHash": "bafybeiavooxmy6dtnyuf2exakaax3lgaluyoipnee2kxpl6tz6i5jgfwru",
+		"name": "Comic Stans",
+		"imageHash": "bafybeieisv6jwvrjlqzgclnqrdomqamjkfimkuko5ayxjdxkknjpnzytcy",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 1,
+		"uriHash": "bafybeihr5zgz4jjhnrz7voi7ipscnh7szh7ip3fezagffjmnj2epmmdrwe",
+		"name": "Bold. Never Regular.",
+		"imageHash": "bafybeiddn4fl6kvftb2kfood4laz66hfevsp6hlis5fssvxfjcypph3omy",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 2,
+		"uriHash": "bafybeifmrp5iut52d4ckujn53pnbovy5et3brm2wcreqickk2jdwfg52u4",
+		"name": "Outwork everyone",
+		"imageHash": "bafybeidkwhi6yf6eh5w35min52nble344udmrsuqa4x74pfbublnb2acvm",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 3,
+		"uriHash": "bafybeihcqnf6zq4bfyfsrukqa62xtfqkcguvfyivamvjea3sgqvevy4vte",
+		"name": "reading this too late",
+		"imageHash": "bafybeienqt7bdsecsulgepdu2j5syoqwbpmjdaasngrw7pvwz67yxjhmpe",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 4,
+		"uriHash": "bafybeihwr6pcs7zscuxidp33v7obzie3l2zrrqh2w6p2h47apjjrozmtni",
+		"name": "bitcoin",
+		"imageHash": "bafybeifbt62ywjsj7jnjwvyqg2zebaip7prvdrvgemhl34k3cw6xps7lsq",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 5,
+		"uriHash": "bafybeiakdiypklz4smexnllirfsobzu2o4z4n5no6lyda7hwrtbm3sdpyy",
+		"name": "gdupi",
+		"imageHash": "bafybeidc2pnauxco2cza4fvpqzacj7kxpu2wicdeu6kimgugr2v76kvrnm",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 6,
+		"uriHash": "bafybeid5zw7ghj3f5yn3jkqodpce6rspneldojgr7ws2ott3hlu7t4cbwu",
+		"name": "i accept it",
+		"imageHash": "bafybeiauh6t4h4bcue5lwip6254mirfipr7nyir2qby5kdk46xx6cmw7pq",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 7,
+		"uriHash": "bafybeictuzzw3uzfp7yvou366w73hymapfc2xrplekywguryttl535efjm",
+		"name": "stand out",
+		"imageHash": "bafybeifmheytcbyk66tlaswgr6lucnojsixqa5m3a5l377w4qw42jhnvnu",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 8,
+		"uriHash": "bafybeid4sqiylof5lov2xlhjtpv6xthsuirvj2ewtirgnbb7yf7b7of6gi",
+		"name": "wtf have i done",
+		"imageHash": "bafybeiczdta7nrqwj4awhmqi2wgcxf2x55g5csk2ftwvdh4sssina5r4fi",
+		"description": ""
+	},
+	{
+		"collectionId": 3,
+		"tokenId": 9,
+		"uriHash": "bafybeihw57fuyo347uw6jafewdr4aa6bbo6sokxtcj6dloibulbf4uhyp4",
+		"name": "feel something",
+		"imageHash": "bafybeiagedgits5zo44ecm7yrmblwhspugpx6g7c5xziz6nyvxvxalhavu",
+		"description": ""
 	}
 ]

@@ -1,7 +1,7 @@
 import { getAddress } from 'viem';
 import { desc, eq } from 'drizzle-orm';
 import type { NewToken } from '@/lib/types';
-import { ethClient, zoraClient } from '@/ethereum';
+import { baseClient, ethClient, zoraClient } from '@/ethereum';
 import abi from '@/ethereum/abi';
 import { db } from '../db';
 import { tokensTable } from '../db/schema';
@@ -9,6 +9,7 @@ import { tokensTable } from '../db/schema';
 const contracts = [
 	{ client: ethClient, id: 1, address: '0x5908eb01497b5d8e53c339ea0186050d487c8d0c' },
 	{ client: zoraClient, id: 2, address: '0x5aBF0c04aB7196E2bDd19313B479baebd9F7791b' },
+	{ client: baseClient, id: 3, address: '0x0c3a11ce08c635d78a0cb521aae14b2a6eef9c09' },
 ].map((c) => ({ ...c, contract: { address: getAddress(c.address), abi } }));
 
 console.log('Retrieving token supply...');
@@ -19,8 +20,9 @@ const supplies = await Promise.all(
 	)
 );
 
-console.log(`Season 1: ${Number(supplies[0])} tokens`);
-console.log(`Season 2: ${Number(supplies[1])} tokens`);
+console.log(`${Number(supplies[0])} tokens on mainnet`);
+console.log(`${Number(supplies[1])} tokens on Zora`);
+console.log(`${Number(supplies[2])} tokens on Base`);
 
 async function fetchNewTokens(contractInfo: (typeof contracts)[number], totalSupply: bigint) {
 	const { client, id, contract } = contractInfo;
@@ -61,11 +63,11 @@ async function fetchNewTokens(contractInfo: (typeof contracts)[number], totalSup
 }
 
 // Fetch token URIs for both contracts
-const [s1Tokens, s2Tokens] = await Promise.all(
+const [s1Tokens, s2Tokens, baseTokens] = await Promise.all(
 	contracts.map((contract, i) => fetchNewTokens(contract, supplies[i]))
 );
 
-const allTokens: NewToken[] = [...s1Tokens, ...s2Tokens];
+const allTokens: NewToken[] = [...s1Tokens, ...s2Tokens, ...baseTokens];
 
 if (!allTokens.length) {
 	console.log('No new tokens to fetch.');

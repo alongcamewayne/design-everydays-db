@@ -1,4 +1,4 @@
-import { mainnet, zora } from 'viem/chains';
+import { base, mainnet, zora } from 'viem/chains';
 import type { NewCollection } from '@/lib/types';
 import { db } from '@/server/db';
 import * as schema from '@/server/db/schema';
@@ -16,6 +16,12 @@ const collections: NewCollection[] = [
 		name: 'Design Everydays, Season 2',
 		chainId: zora.id,
 		contractAddress: '0x5aBF0c04aB7196E2bDd19313B479baebd9F7791b',
+	},
+	{
+		id: 3,
+		name: 'Design Everydays, Base',
+		chainId: base.id,
+		contractAddress: '0x0c3a11ce08c635d78a0cb521aae14b2a6eef9c09',
 	},
 ];
 

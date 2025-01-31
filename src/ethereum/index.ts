@@ -1,5 +1,5 @@
 import { createPublicClient, http } from 'viem';
-import { mainnet, zora } from 'viem/chains';
+import { base, mainnet, zora } from 'viem/chains';
 
 export const ethClient = createPublicClient({
 	chain: mainnet,
@@ -8,5 +8,10 @@ export const ethClient = createPublicClient({
 
 export const zoraClient = createPublicClient({
 	chain: zora,
+	transport: http(),
+});
+
+export const baseClient = createPublicClient({
+	chain: base,
 	transport: http(),
 });

@@ -32,7 +32,7 @@ export default function Home({ data }: HomeProps) {
 									className="w-full cursor-pointer overflow-hidden rounded-none transition hover:bg-primary/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-white">
 									<Card className="rounded-none border-current bg-transparent text-current">
 										<CardHeader>
-											<CardTitle>Season {metadata.id}</CardTitle>
+											<CardTitle>{metadata.id === 3 ? 'Base' : `Season ${metadata.id}`}</CardTitle>
 										</CardHeader>
 										<CardContent>
 											<p>{tokens.length} designs</p>
