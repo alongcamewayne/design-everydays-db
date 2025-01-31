@@ -19,9 +19,21 @@ const collections: NewCollection[] = [
 	},
 	{
 		id: 3,
-		name: 'Design Everydays, Base',
+		name: 'Design Everydays, Comic Stans',
 		chainId: base.id,
 		contractAddress: '0x0c3a11ce08c635d78a0cb521aae14b2a6eef9c09',
+	},
+	{
+		id: 4,
+		name: 'Design Everydays, Higher',
+		chainId: base.id,
+		contractAddress: '0xa1c856ac4e5d022dc7c0fcde6f7768d8b131222d',
+	},
+	{
+		id: 5,
+		name: 'Design Everydays, Based Everydays',
+		chainId: base.id,
+		contractAddress: '0x29b94d9086beab4a5015ff55deb1a1e24edd8108',
 	},
 ];
 

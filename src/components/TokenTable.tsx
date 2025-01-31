@@ -171,7 +171,7 @@ export default function TokenTable({ data }: TokenTableProps) {
 									<div className="flex flex-col gap-2">
 										<Button asChild>
 											<Link
-												href={`https://zora.co/collect/${data.metadata.chainId === 1 ? 'eth' : 'zora'}:${data.metadata.contractAddress}/${token.tokenId}`}
+												href={`https://zora.co/collect/${data.metadata.chainId === 1 ? 'eth' : data.metadata.chainId === 7777777 ? 'zora' : 'base'}:${data.metadata.contractAddress}/${token.tokenId}`}
 												target="_blank"
 												className="py-5">
 												Open on Zora

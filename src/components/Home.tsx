@@ -17,7 +17,10 @@ export default function Home({ data }: HomeProps) {
 	return (
 		<div>
 			<div className="my-5">
-				<RadioGroup className="flex" defaultValue="0" onValueChange={(e) => setActiveChoice(e)}>
+				<RadioGroup
+					className="grid grid-cols-3"
+					defaultValue="0"
+					onValueChange={(e) => setActiveChoice(e)}>
 					{data.map(({ metadata, tokens }, i) => {
 						return (
 							<div key={i} className="flex w-full gap-2">
@@ -32,7 +35,11 @@ export default function Home({ data }: HomeProps) {
 									className="w-full cursor-pointer overflow-hidden rounded-none transition hover:bg-primary/10 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary peer-data-[state=checked]:text-white">
 									<Card className="rounded-none border-current bg-transparent text-current">
 										<CardHeader>
-											<CardTitle>{metadata.id === 3 ? 'Base' : `Season ${metadata.id}`}</CardTitle>
+											<CardTitle>
+												{[3, 4, 5].includes(metadata.id)
+													? metadata.name.split(',')[1]
+													: `Season ${metadata.id}`}
+											</CardTitle>
 										</CardHeader>
 										<CardContent>
 											<p>{tokens.length} designs</p>
